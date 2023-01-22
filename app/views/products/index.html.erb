@@ -1,0 +1,241 @@
+<p id="notice"><%= notice %></p>
+
+  <!-- Header -->
+<header>
+  <!-- navbar and menu -->
+  <nav class="shadow">
+
+  <div class="flex justify-between items-center py-6 px-10 container mx-auto">
+
+    <div>
+      <h1 class="text-2xl font-bold bg-gradient-to-tr from-indigo-600 to-green-600 bg-clip-text text-transparent hover:cursor-pointer">IATF16949</h1>
+    </div>
+
+    <div>
+      
+      <div class="hover:cursor-pointer sm:hidden">
+        <spnan class="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600"></spnan>
+        <spnan class="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600"></spnan>
+        <spnan class="h-1 rounded-full block w-8 mb-1 bg-gradient-to-tr from-indigo-600 to-green-600"></spnan>
+      </div>
+      <div class="flex items-center">
+      <%= search_form_for @q do |f| %>
+
+        <ul class="sm:flex space-x-4 hidden items-center">
+
+          
+        
+          <li><div class="text-gray-700 hover:text-indigo-600 text-md ">
+              <%= "図番" %> <br>
+              <%= f.collection_select :partnumber_eq, Product.select(:partnumber).distinct.order(:partnumber), :partnumber, :partnumber,  include_blank: '指定なし'  %>
+          </div></li>
+
+          <li><div class="text-gray-700 hover:text-indigo-600 text-md ">
+              <%= "材料コード" %> <br>
+              <%= f.collection_select :materialcode_eq, Product.select(:materialcode).distinct.order(:materialcode), :materialcode, :materialcode,  include_blank: '指定なし'  %>
+          </div></li>
+
+          <li><div class="text-gray-700 hover:text-indigo-600 text-md ">
+              <%= "文書名" %> <br>
+              <%= f.collection_select :documentname_eq, Product.select(:documentname).distinct.order(:documentname), :documentname, :documentname,  include_blank: '指定なし'  %>
+          </div></li>
+
+          <li><div class="text-gray-700 hover:text-indigo-600 text-md ">
+              <%= "コメント" %> <br>
+              <%= f.collection_select :description_eq, Product.select(:description).distinct.order(:description), :description, :description,  include_blank: '指定なし'  %>
+          </div></li>
+
+         <%= f.submit '検索',class:"text-text-gray-600  py-2 hover:cursor-pointer px-4 rounded text-white bg-gradient-to-tr from-indigo-600 to-green-600 hover:shadow-lg" %>
+          <span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor ">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg></span>
+
+        </ul>
+      <% end %>
+      </div>
+    </div>
+  </div>
+  </nav>
+</header>
+<main>
+  <!-- section hero -->
+ <section class="flex h-screen">
+  
+    <div class="w-1/6 ">
+            <div class="bg-white py-3 px-4 rounded-lg flex justify-around items-center ">
+              <input type="text" placeholder="seach" class=" bg-gray-100 rounded-md  outline-none pl-2 ring-indigo-700 w-full mr-2 p-2">
+              <span><svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor ">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg></span>
+            </div>
+
+            <div class="bg-white  rounded-md ">
+              <h1 class="text-center font-bold text-text-gray-600  py-2 hover:cursor-pointer px-4 rounded text-white bg-gradient-to-tr from-indigo-600 to-green-600 hover:shadow-lg">Menu</h1>
+              <div class="bg-white rounded-md list-none  text-center ">
+                  <div>
+                    <li class="py-3 border-b-2"><a> <%= link_to '新規製品登録', new_product_path, class: "py-4 text-gray-700 hover:text-indigo-600 text-md" %></a></li>
+
+                    <li class="py-3 border-b-2"><a><%= link_to '全アイテム進捗一覧表', index3_product_path, class: "py-4 text-gray-700 hover:text-indigo-600 text-md" %></a></li>
+
+                    <li class="py-3 border-b-2"><a><%= link_to '全アイテム日程表', index9_product_path, class: "py-4 text-gray-700 hover:text-indigo-600 text-md" %></a></li>
+                    
+
+
+                    <li class="py-3 border-b-2"><a>
+                        <%= form_with(url: index2_product_path, method: :get, local: true) do|form| %>
+                        <%= form.label :"図番選択" %> <br>
+                        <% @produc=Product.select(:partnumber).distinct.order(:partnumber) %>
+                        <%= form.collection_select(:partnumber, @produc, :partnumber, :partnumber,{prompt: '選択してください',class:"hidden"})%> 
+                        <%= form.submit "APQP・PPAP一覧表示 (図番毎)",class:"btn"%>
+                        <% end %>
+                    </a></li>
+
+                    <li class="py-3 border-b-2"><a>
+                        <%= form_with(url: index8_product_path, method: :get, local: true) do|form| %>
+                        <%= form.label :"図番選択" %> <br>
+                        <% @produc=Product.select(:partnumber).distinct.order(:partnumber) %> 
+                        <%= form.collection_select(:partnumber, @produc, :partnumber, :partnumber,{prompt: '選択してください',class:"hidden"})%> <br>
+                        <%= form.submit "達成度 (図番毎)",class:"btn"%>
+                        <% end %>                    
+                    </a></li>
+                    <!--
+                     #RailsでExcel出力しないといけなくなった時の対処法
+                     #https://www.timedia.co.jp/tech/railsexcel/
+                    -->
+
+                    <li class="py-3 "><a>
+                    <%= form_with(url: index4_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATF要求事項説明",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+
+                    <li class="py-3 "><a>
+                    <%= form_with(url: graph_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATF進捗グラフ",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+
+                    <li class="py-3 "><a>
+                    <%= form_with(url: calendar_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATF進捗カレンダー",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+
+                     
+
+                    <li class="py-3 "><a>
+                    <%= form_with(url: download_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "Csv 出力",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+                  </div>
+              </div>
+            </div> 
+    </div>
+
+    <div class="w-5/6 bg-blue-800 p-8 text-white rounded-lg ">
+
+      <!--
+      Border Spacing
+      https://tailwindcss.com/docs/border-spacing
+      -->
+
+      <table  class="border-separate border-spacing-1 border border-slate-400">
+        <thead>
+              <tr>  
+                  <th class="border border-slate-300"><%= sort_link(@q, :partnumber, "図番") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :materialcode, "材料コード") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :documentname, "文書名") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :description, "詳細") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :category , "カテゴリー") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :phase, "フェーズ") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :stage, "項目") %></th>      
+                  <th class="border border-slate-300"><%= sort_link(@q, :start_time, "登録日") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :deadline_at, "完了予定日") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :end_at, "完了日") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :goal_attainment_level, "達成度(%)") %></th>
+                  <th class="border border-slate-300"><%= sort_link(@q, :status, "ステイタス") %></th>
+                  <th colspan="3"></th>
+                  <th>アイコン</th>
+               
+              </tr>
+        </thead>
+  
+          <tbody>
+            <% @products.each do |pro| %>
+                   <tr>
+                     <% if pro.partnumber=="" || pro.partnumber==nil %>
+                         <td class="border border-slate-300"><%= "----" %></td>
+                     <% else %>
+                         <td class="border border-slate-300"><%= pro.partnumber %></td>
+                     <% end %>
+                     
+                     <% if pro.materialcode=="" || pro.materialcode==nil  %>
+                         <td class="border border-slate-300"><%= "----" %></td>
+                     <% else %>
+                         <td class="border border-slate-300"><%= pro.materialcode %></td>
+                     <% end %>
+ 
+                     <% if pro.documentname=="" || pro.documentname==nil  %>
+                         <td class="border border-slate-300"><%= "----" %></td>
+                     <% else %>
+                         <td class="border border-slate-300"><%= pro.documentname %></td>
+                     <% end %>
+
+                     <% if pro.description=="" || pro.description==nil  %>
+                         <td class="border border-slate-300"><%= "----" %></td>
+                     <% else %>
+                         <td class="border border-slate-300"><%= pro.description %></td>
+                     <% end %>
+
+                     <td class="border border-slate-300"><%= @dropdownlist[pro.category.to_i] %></td>
+                     <td class="border border-slate-300"><%= @dropdownlist[pro.phase.to_i] %></td>
+                     <td class="border border-slate-300"><%= @dropdownlist[pro.stage.to_i] %></td>
+                     <!--【初心者向け・動画付き】Railsで日時をフォーマットするときはstrftimeよりも、lメソッドを使おう
+                     https://qiita.com/jnchito/items/831654253fb8a958ec25
+                     -->
+                     <% if pro.start_time==nil %>
+                           <td class="border border-slate-300"><%= "------"  %></td>
+                     <% else %>
+                           <td class="border border-slate-300"><%= pro.start_time.strftime('%y/%m/%d')  %></td>
+                     <% end %>
+                     <% if pro.deadline_at==nil %>
+                           <td class="border border-slate-300"><%= "------"  %></td>
+                     <% else %>
+                           <td class="border border-slate-300"><%= pro.deadline_at.strftime('%y/%m/%d')  %></td>
+                     <% end %>
+                     <% if pro.end_at==nil %>
+                           <td class="border border-slate-300"><%= "------"  %></td>
+                     <% else %>
+                           <td class="border border-slate-300"><%= pro.end_at.strftime('%y/%m/%d')  %></td>
+                     <% end %>
+                     
+                     <td class="border border-slate-300"><%= pro.goal_attainment_level %></td>
+                     <td class="border border-slate-300"><%= pro.status %></td>
+                     <td><div class="btn btn-accent"><%= button_to '詳細表示', product_path(pro), { method: :get, params: pro }  %></div></td>
+                     <td><div class="btn btn-primary"><%= button_to '編集', edit_product_path(pro), { method: :get, params: pro } %><div></td>
+                     <!--https://katsushi-ougi.com/rails7-method-delete-->
+                     <td><div class="btn btn-secondary"> <%= button_to '削除', pro, {method: :delete, data: { confirm: '本当に削除しますか？' } } %></div></td>
+                     <!--https://y-i.jp/entry/rails7-form-data-confirm-->
+                     <!--Rails7 で button_to の data-confirm の挙動が変わって data.confirm から form.data.confirm に変わってました
+                     <td><%= button_to "削除", product_path(pro), { method: :delete, form: { data: { turbo_confirm: "本当に削除しますか？" } } } %></td>
+                     -->
+                     <%= render partial: "attached_file", locals: { pro: pro }  %>
+                   </tr>
+              <% end %>
+          <br>
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+    </div>
+  
+ </section>
+</main>
+
+
+
+
+
+
