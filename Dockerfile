@@ -15,7 +15,23 @@ COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN apt-get update && apt-get install -y libvips42
 RUN bundle install
+#bin/rails アクセス拒否
+#https://qiita.com/tands4247/questions/8389892fef23e2c4a3ec
+#RUN chmod +x bin/rails
+#Rails 7でTailwind CSSを使ってみた
+#https://qiita.com/345dvl/items/4bafb05964281079033e
+#RUN bin/rails css:install:tailwind
 COPY . /myapp
+
+
+
+
+#WORKDIR /myapp
+#COPY Gemfile /myapp/Gemfile
+#COPY Gemfile.lock /myapp/Gemfile.lock
+#RUN apt-get update && apt-get install -y libvips42
+#RUN bundle install
+#COPY . /myapp
 
 #COPY entrypoint.sh /usr/bin/
 #RUN chmod +x /usr/bin/entrypoint.sh
