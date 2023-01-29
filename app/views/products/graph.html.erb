@@ -91,36 +91,36 @@
 <br>
 <br>
 
-<section class="flex h-screen">
+<section>
   
-  <div>
-    <span>
+  <div class="lg:flex">
+    <div class="flex-auto">
       <strong><font color="black" size="4">APQP</font>
               <font color="blue"  size="5">完成</font> 
               <font color="black" size="4">件数(製品)</font></strong>
       <%= bar_chart tassei2 ,label: "APQP完成件数" ,width: "500px", height: "400px"%>
-    </span>
+    </div>
 
-    <span>
+    <div class="flex-auto">
       <strong><font color="black" size="4">APQP</font>
               <font color="blue"  size="5">完成</font>
               <font color="black" size="4">割合 by 製品</font></strong>
       <%= pie_chart tassei2 , label: "APQP完成割合 by 製品" ,width: "500px", height: "400px"%>
-    </span>
+    </div>
 
-    <span>
+    <div class="flex-auto">
       <strong><font color="black" size="4">APQP</font>
               <font color="blue"  size="5">完成</font>
               <font color="black" size="4">件数(文書カテゴリー)</font></strong>
       <%= bar_chart d_tassei2, label: "APQP完成件数" ,width: "500px", height: "400px"%>
-    </span>
+    </div>
 
-    <span>
+    <div class="flex-auto">
       <strong><font color="black" size="4">APQP</font>
               <font color="blue"  size="5">完成</font>
               <font color="black" size="4">割合 by 文書カテゴリー毎</font></strong>
       <%= pie_chart d_tassei2 , label: "APQP完成割合 by 製品" ,width: "500px", height: "400px"%>
-    </span>
+    </div>
 
   </div>
 
@@ -129,34 +129,34 @@
 <br>
 
 
-  <div>
-    <span class="w-1/4">
+  <div class="lg:flex">
+    <div class="flex-auto">
       <strong><font color="black" size="4">APQP</font>
               <font color="magenta" size="5">仕掛</font>
               <font color="black" size="4">件数(製品)</font></strong>
       <%= bar_chart tassei3 ,label: "APQP完成件数",width: "500px", height: "400px" %>
-    </span>
+    </div>
 
-    <span class="w-1/4">
+    <div class="flex-auto">
       <strong><font color="black"   size="4">APQP</font>
               <font color="magenta" size="5">仕掛</font>
               <font color="black"   size="4">割合 by 製品</font></strong>
       <%= pie_chart tassei3 , label: "APQP完成割合 by 製品",width: "500px", height: "400px"%>
-    </span>
+    </div>
 
-    <span class="w-1/4">
+    <div class="flex-auto">
       <strong><font color="black"   size="4">APQP</font>
               <font color="magenta" size="5">仕掛</font>
               <font color="black"   size="4">件数(文書カテゴリー)</font></strong>
       <%= bar_chart d_tassei3, label: "APQP完成件数",width: "500px", height: "400px" %>
-    </span>
+    </div>
 
-    <span class="w-1/4">
+    <div class="flex-auto">
       <strong><font color="black"   size="4">APQP</font>
               <font color="magenta" size="5">仕掛</font>
               <font color="black"   size="4">割合 by 文書カテゴリー毎</font></strong>
       <%= pie_chart d_tassei3 , label: "APQP完成割合 by 製品",width: "500px", height: "400px"%>
-    </span>
+    </div>
 
   </div>
 </section>

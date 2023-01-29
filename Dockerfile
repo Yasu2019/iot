@@ -5,6 +5,11 @@ FROM ruby:2.7.3
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client npm
 # Daisyui UI をインストール
 RUN npm i daisyui
+#【Tailwind CSS】長い文字列を三点リーダー（…）で省略する方法
+#https://zenn.dev/ilove/articles/8a93705d396e05
+# Using npm
+RUN npm install @tailwindcss/line-clamp
+
 # 追加 ==================
 RUN apt-get update
 RUN apt-get install vim -y
