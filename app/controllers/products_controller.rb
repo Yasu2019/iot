@@ -1,8 +1,22 @@
-require 'csv'
+
 
 class ProductsController < ApplicationController
+  
   before_action :set_product, only: %i[ show edit update destroy ]
-  before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download]
+  before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download xlsx generate_xlsx]
+
+  #RailsでAxlsxを使ってxlsxを生成
+  #https://qiita.com/necojackarc/items/0dbd672b2888c30c5a38
+
+  def xlsx
+    @products = Product.all
+    respond_to do |format|
+      format.html
+      format.xlsx do
+        generate_xlsx
+      end
+    end
+  end
 
   def search
     @qd = Product.ransack(params[:qd])
@@ -21,6 +35,13 @@ class ProductsController < ApplicationController
   def calendar
     #@products=Product.all.page(params[:page]).per(10)
     @products=Product.all
+    #@user = current_user    
+  end
+
+  def video
+    #@products=Product.all.page(params[:page]).per(10)
+    @products=Product.all
+   
     #@user = current_user    
   end
 
@@ -68,29 +89,37 @@ class ProductsController < ApplicationController
   #RailsでExcel出力しないといけなくなった時の対処法
   #https://www.timedia.co.jp/tech/railsexcel/
 
-  #def download
-  #  response.headers["Content-Type"] = "application/excel"
-  #  response.headers["Content-Disposition"] = "attachment; filename=\"製品データ.xls\""
+  def download
+    response.headers["Content-Type"] = "application/excel"
+    response.headers["Content-Disposition"] = "attachment; filename=\"製品データ.xls\""
       #@date_from = Date.new(2014,3,1)
       #@date_to = Date.new(2014,3,31)
-    #@product = Product.find(params[:id])
-  #  @products=Product.all
-  #end
-
-  def download
+      #@product = Product.find(params[:id])
     @products=Product.all
-    header = ['図番', 'フェーズ', '項目']
-    generated_csv = CSV.generate(row_sep: "\r\n") do |csv|
-      csv << header
-      @products.each do |pro|
-        csv << [pro.partnumber, pro.phase, pro.stage]
-      end
-    end
+    
 
-    send_data generated_csv.encode(Encoding::CP932, invalid: :replace, undef: :replace),
-      filename: 'product_list.csv',
-      type: 'text/csv; charset=shift_jis'
+
+      #@stocks = ProductStock
+      #  .where(product_id: @product.id)
+      #  .where(date: @date_from..@date_to)
+      #  .order(:date)
+    render 'data_download.xls.erb'
+     
+    
   end
+
+
+
+  
+
+  def process_design_download
+    response.headers["Content-Type"] = "application/excel"
+    response.headers["Content-Disposition"] = "attachment; filename=\"製造工程設計計画書／実績書.xls\""
+    @products = Product.where(partnumber:params[:partnumber])
+    render 'process_design_download.xls.erb'
+  end
+
+
   
   def create
     @product = Product.new(product_params)
@@ -184,6 +213,32 @@ class ProductsController < ApplicationController
 
   private
 
+  #RailsでAxlsxを使ってxlsxを生成
+  #https://qiita.com/necojackarc/items/0dbd672b2888c30c5a38
+
+  #【Rails】 strftimeの使い方と扱えるクラスについて
+  #https://pikawaka.com/rails/strftime
+
+  def generate_xlsx
+    Axlsx::Package.new do |p|
+      p.workbook.add_worksheet(name: "登録データ一覧") do |sheet|
+        styles = p.workbook.styles
+        title = styles.add_style(bg_color: 'c0c0c0', b: true)
+        header = styles.add_style(bg_color: 'e0e0e0', b: true)
+  
+        sheet.add_row ["登録データ一覧"], style: title
+        sheet.add_row %w(ID 図番 材料コード 文書名 詳細 カテゴリー フェーズ 項目 登録日 完了予定日 完了日 達成度 ステイタス), style: header
+        @products.each do |pro|      
+        sheet.add_row [pro.id, pro.partnumber,pro.materialcode,pro.documentname,pro.description,@dropdownlist[pro.category.to_i],@dropdownlist[pro.phase.to_i],@dropdownlist[pro.stage.to_i],pro.start_time.strftime('%y/%m/%d'),pro.deadline_at.strftime('%y/%m/%d'),pro.end_at.strftime('%y/%m/%d'),pro.goal_attainment_level,pro.status]
+        end
+      end
+      send_data(p.to_stream.read,
+                type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                filename: "登録データ一覧(#{Time.now.strftime('%Y_%m_%d_%H_%M_%S')}).xlsx")
+    end
+  end
+
+  
   def set_q
     @q = Product.ransack(params[:q])
   end

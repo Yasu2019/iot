@@ -38,6 +38,11 @@ module Myapp
     #https://qiita.com/mmaumtjgj/items/93ab3ef8cbcf9591fc30
     config.i18n.default_locale = :ja
 
+    #Railsタイムゾーンまとめ
+    #https://qiita.com/aosho235/items/a31b895ce46ee5d3b444
+    config.time_zone = 'Tokyo'
+    config.active_record.default_timezone = :local
+
 
 
   end

@@ -109,3 +109,12 @@ gem 'cssbundling-rails'
 gem 'propshaft'
 
 gem 'foreman'
+
+#railsでテンプレートからエクセル出力する方法
+#https://intellectual-curiosity.tokyo/2018/09/21/rails%e3%81%a7%e3%83%86%e3%83%b3%e3%83%97%e3%83%ac%e3%83%bc%e3%83%88%e3%81%8b%e3%82%89%e3%82%a8%e3%82%af%e3%82%bb%e3%83%ab%e5%87%ba%e5%8a%9b%e3%81%99%e3%82%8b%e6%96%b9%e6%b3%95/
+
+#railsで.xlsxを生成する
+#https://qiita.com/shotay79/items/b66148f30496d43bcbfe
+
+gem 'caxlsx'
+gem 'caxlsx_rails'

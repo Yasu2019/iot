@@ -75,10 +75,8 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <% end %>
                     </a></li>
 
-                    <li class="py-3 "><a>
-                    <%= form_with(url: download_product_path, method: :get, local: true) do|form| %>
-                    <%= form.submit "Csv 出力",class:"btn btn-secondary" %>
-                    <% end %>
+                    <li class="py-2 "><a>
+                    <%= link_to "Excel出力", xlsx_product_path(@product, format: :xlsx),class:"btn btn-secondary" %>
                     </a></li>
 
 
@@ -151,7 +149,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
   <div class="flex justify-between items-center py-6 px-10 container mx-auto">
 
     <div>
-      <h1 class="px-12 text-2xl font-bold bg-gradient-to-tr from-indigo-600 to-green-600 bg-clip-text text-transparent hover:cursor-pointer">IATF16949</h1>
+      <h1 class="px-12 text-3xl font-bold bg-gradient-to-tr from-indigo-600 to-green-600 bg-clip-text text-transparent hover:cursor-pointer">IATF16949</h1>
     </div>
 
     <div>
@@ -166,7 +164,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
       <div class="flex items-center">
       <%= search_form_for @q do |f| %>
 
-        <ul class="lg:flex space-x-4 hidden items-center">
+        <ul class="hidden lg:flex space-x-4 items-center">
 
           
         
@@ -204,7 +202,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
 </header>
 <main>
   <!-- section hero -->
- <section class="flex h-screen">
+ <section class="flex h-full">
   
     <div class="hidden lg:inline-block w-1/6 ">
             <div class="bg-white py-3 px-4 rounded-lg flex justify-around items-center ">
@@ -217,7 +215,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
             <div class="bg-white  rounded-md ">
               <h1 class="text-center font-bold text-text-gray-600  py-2 hover:cursor-pointer px-4 rounded text-white bg-gradient-to-tr from-indigo-600 to-green-600 hover:shadow-lg">Menu</h1>
               <div class="bg-white rounded-md list-none  text-center ">
-                  <div>
+    
                     <li class="py-2 border-b-2"><a> <%= link_to '新規製品登録', new_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a></li>
 
                     <li class="py-2 border-b-2"><a><%= link_to '全アイテム進捗一覧表', index3_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a></li>
@@ -266,19 +264,43 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <% end %>
                     </a></li>
 
-                     
-
                     <li class="py-2 "><a>
-                    <%= form_with(url: download_product_path, method: :get, local: true) do|form| %>
-                    <%= form.submit "Csv 出力",class:"btn btn-secondary" %>
+                    <%= form_with(url: video_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATFk教材",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
+
+                    <!--
+                    #RailsでAxlsxを使ってxlsxを生成
+                    #https://qiita.com/necojackarc/items/0dbd672b2888c30c5a38
+                    -->
+
+
+                    <li class="py-2 "><a>
+                    <%= link_to "Excel出力", xlsx_product_path(@product, format: :xlsx),class:"btn btn-secondary" %>
+                    </a></li>
+
+
+
+                    <!--
+                    <li class="py-2 "><a>
+                    <%= form_with(url: process_design_download_path, method: :get, local: true) do|form| %>
+                    <%= form.label :"図番選択" %> <br>
+                    <% @produc=Product.select(:partnumber).distinct.order(:partnumber) %> 
+                    <%= form.collection_select(:partnumber, @produc, :partnumber, :partnumber)%> <br>
+                    <%= form.submit "製造工程設計計画/達成度報告書",class:"btn btn-secondary"%>
+                    <% end %>
+                    </a></li>
+                    -->
+
+
+
                   </div>
               </div>
             </div> 
     </div>
     
-    <div class="w-full lg:w-5/6 bg-blue-700 p-8 text-gray-500 rounded-lg ">
+    <div class="w-full lg:w-5/6 bg-blue-700 p-8 text-gray-600 rounded-lg ">
 
       <!--
       Border Spacing
@@ -388,6 +410,25 @@ xl	1280px	@media (min-width: 1280px) { ... }
   
  </section>
 </main>
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style>
 .menu-btn {

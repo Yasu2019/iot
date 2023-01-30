@@ -10,55 +10,42 @@
 <% tassei=[] %>
 <% tassei1=[] %>
 <% tassei2=[] %>
-
 <% @products.each do |pro| %>
   <% if pro.status=="完了" && @dropdownlist[pro.category.to_i]=="製品" %>
     <% tassei.push(pro.partnumber) %>
   <% end %>
 <% end %>
-
 <% @jyufukunashi=Product.select(:partnumber).distinct.order(:partnumber) %>
-
 <% @jyufukunashi.each do |j| %>
   <% if j.partnumber!=nil || j.partnumber!=""  %>
     <% tassei1=[j.partnumber,tassei.count(j.partnumber)]%>
     <% tassei2.push(tassei1)  %>
   <% end %>
 <% end %>
-
-
 <% tassei=[] %>
 <% tassei1=[] %>
 <% d_tassei2=[] %>
-
 <% @products.each do |pro| %>
   <% if pro.status=="完了" && @dropdownlist[pro.category.to_i]=="文書" %>
     <% tassei.push(pro.documentname) %>
   <% end %>
 <% end %>
-
 <% @jyufukunashi=Product.select(:documentname).distinct.order(:documentname) %>
-
 <% @jyufukunashi.each do |j| %>
   <% if j.documentname!=nil  || j.documentname!="" %>
     <% tassei1=[j.documentname,tassei.count(j.documentname)]%>
     <% d_tassei2.push(tassei1)  %>
   <% end %>
 <% end %>
-
-
 <% tassei=[] %>
 <% tassei1=[] %>
 <% tassei3=[] %>
-
 <% @products.each do |pro| %>
   <% if pro.status=="仕掛中" && @dropdownlist[pro.category.to_i]=="製品" %>
     <% tassei.push(pro.partnumber) %>
   <% end %>
 <% end %>
-
 <% @jyufukunashi=Product.select(:partnumber).distinct.order(:partnumber) %>
-
 <% @jyufukunashi.each do |j| %>
   <% if j.partnumber!=nil || j.partnumber!="" %>
     
@@ -66,20 +53,15 @@
     <% tassei3.push(tassei1)  %>
   <% end %>
 <% end %>
-
-
 <% tassei=[] %>
 <% tassei1=[] %>
 <% d_tassei3=[] %>
-
 <% @products.each do |pro| %>
   <% if pro.status=="仕掛中" && @dropdownlist[pro.category.to_i]=="文書" %>
     <% tassei.push(pro.documentname) %>
   <% end %>
 <% end %>
-
 <% @jyufukunashi=Product.select(:documentname).distinct.order(:documentname) %>
-
 <% @jyufukunashi.each do |j| %>
   <% if j.documentname!=nil || j.documentname!="" %>
     
@@ -163,7 +145,4 @@
 
 <br>
 <br>
-
-
-
 
