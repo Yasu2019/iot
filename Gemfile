@@ -118,3 +118,16 @@ gem 'foreman'
 
 gem 'caxlsx'
 gem 'caxlsx_rails'
+
+#【Rails】Active Storageの基本情報と実装方法
+#https://autovice.jp/articles/134
+
+
+#PDF not previewable with rails active storage?
+#https://stackoverflow.com/questions/56994871/pdf-not-previewable-with-rails-active-storage
+gem 'poppler' 
+
+#Active Storage previewer for Microsoft Office files
+#https://github.com/basecamp/activestorage-office-previewer
+
+gem "activestorage-office-previewer"

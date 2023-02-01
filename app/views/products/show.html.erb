@@ -93,15 +93,43 @@
          <% @product.documents.each do |image| %>
            <% fullfilename = rails_blob_path(image) %>
            <% @ext = File.extname(fullfilename).downcase %>
+           
            <% if @ext== ".jpg" ||  @ext== ".jpeg" ||  @ext== ".png" ||  @ext== ".gif" %> 
                  <br>
                  <%= image.blob.filename %> <br>
                  <%= image_tag image,:size=>"100x100"  %>
+           <!--
+           <% elsif @ext== ".pdf" %>
+           -->
            <% end %>
+         <% end %>  
+     <% end %>
+
+     <% @product.documents.each do |image| %>
+       
+         <% if image.representable? %>
+             <%= image_tag image.representation(resize_to_limit: [200, 200]) %>
          <% end %>
-    <%else%>
-      <strong>無し </strong> <br>
-    <% end %>
+              
+     
+              
+     <% end %>
+      
+       
+ 
+           <!--
+           HTMLでPDFを表示する方法5選！PDFの埋め込みをするには？
+           https://aprico-media.com/posts/4051          
+           <iframe src="https://s3-ap-northeast-1.amazonaws.com/cdn.aprico-media.com/resources/sample.pdf" width="20%" height="20%"></iframe>
+           -->
+           <!--
+           https://stackoverflow.com/questions/56994871/pdf-not-previewable-with-rails-active-storage
+           https://stackoverflow.com/questions/56994871/pdf-not-previewable-with-rails-active-storage
+           https://schneems.com/2018/05/11/rails-52-active-storage-previews-poppler-and-solving-licensing-pitfalls/
+           -->
+          
+      
+    
 
     <br><br>
     <% if @product.documents.attached? %>
@@ -120,6 +148,9 @@
 
     <% end %>
     </p>
+
+      
+    
 
   <%= link_to '戻る', products_path ,class:"btn btn-secondary"%>
 

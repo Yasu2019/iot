@@ -38,7 +38,7 @@ class ProductsController < ApplicationController
     #@user = current_user    
   end
 
-  def video
+  def training
     #@products=Product.all.page(params[:page]).per(10)
     @products=Product.all
    

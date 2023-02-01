@@ -10,6 +10,12 @@ RUN npm i daisyui
 # Using npm
 RUN npm install @tailwindcss/line-clamp
 
+#How To Install "x11-utils" Package on Ubuntu
+#https://zoomadmin.com/HowToInstall/UbuntuPackage/x11-utils
+#RUN apt-get install -y x11-utils
+
+
+
 # 追加 ==================
 RUN apt-get update
 RUN apt-get install vim -y
@@ -19,6 +25,21 @@ WORKDIR /myapp
 COPY Gemfile /myapp/Gemfile
 COPY Gemfile.lock /myapp/Gemfile.lock
 RUN apt-get update && apt-get install -y libvips42
+
+#PDF not previewable with rails active storage?
+#https://stackoverflow.com/questions/56994871/pdf-not-previewable-with-rails-active-storage
+#You need to install poppler and poppler-utils on system level.
+
+#How To Install poppler-utils on Ubuntu 22.04
+#https://installati.one/install-poppler-utils-ubuntu-22-04/
+
+#Active Storage の概要
+#https://railsguides.jp/active_storage_overview.html
+
+
+RUN apt-get -y install poppler-utils
+
+
 RUN bundle install
 #bin/rails アクセス拒否
 #https://qiita.com/tands4247/questions/8389892fef23e2c4a3ec

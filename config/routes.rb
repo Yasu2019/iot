@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   get 'products/graph' => 'products#graph',               as: 'graph_product'
   get 'products/calendar' => 'products#calendar',         as: 'calendar_product'
-  get 'products/video' => 'products#video',               as: 'video_product'
+  get 'products/training' => 'products#training',         as: 'training_product'
   get 'products/index2' => 'products#index2',             as: 'index2_product'
   get 'products/index3' => 'products#index3',             as: 'index3_product' # 全Itemのステイタス一覧
   get 'products/index4' => 'products#index4',             as: 'index4_product' # IATF要求事項説明ページ
