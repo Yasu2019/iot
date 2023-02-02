@@ -131,3 +131,5 @@ gem 'poppler'
 #https://github.com/basecamp/activestorage-office-previewer
 
 gem "activestorage-office-previewer"
+
+gem 'devise'
