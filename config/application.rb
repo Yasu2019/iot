@@ -1,3 +1,9 @@
+
+#【Ruby on Rails】CSVインポート
+#https://qiita.com/seitarooodayo/items/c9d6955a12ca0b1fd1d4
+require 'rails/all'
+require 'csv'
+
 require_relative "boot"
 
 require "rails"

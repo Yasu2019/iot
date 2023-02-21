@@ -51,6 +51,8 @@ gem "image_processing", "~> 1.2"
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+
+
 end
 
 group :development do
@@ -62,6 +64,9 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
+
+
+
 end
 
 
@@ -133,3 +138,27 @@ gem 'poppler'
 gem "activestorage-office-previewer"
 
 gem 'devise'
+
+#【Ruby on Rails】CSVインポート
+#https://qiita.com/seitarooodayo/items/c9d6955a12ca0b1fd1d4
+gem 'roo'
+
+#【Rails】もっと早く知りたかったデバッグ用gem 'better_errors','binding_of_caller'
+#https://qiita.com/terufumi1122/items/a6f9a939dce25b2d9a3e
+
+#※Dockerを使用している場合はもうひと手間必要
+#BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
+#仮想環境を使っている方は、うまく動作しないようです。
+#私はDockerを使っていますが、上記コードを追記してサーバー再起動で動作しました。
+
+#【Rails】Rails開発者に絶対おすすめしたいデバッグ手法５選（初心者向け）
+#https://techtechmedia.com/debug-summary-rail/
+
+
+gem 'better_errors', group: :development
+gem 'binding_of_caller', group: :development
+
+#pry-byebug を使ってRailsアプリをデバックする方法
+#https://qiita.com/ryosuketter/items/da3a38d0d41c7e20a2d6
+gem 'pry-byebug', group: :development
+

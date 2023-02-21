@@ -1,9 +1,135 @@
 
 
 class ProductsController < ApplicationController
-  
+  require 'csv'
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download xlsx generate_xlsx]
+
+  def iot
+    timetoday=Time.now.strftime("%Y_%m_%d")
+
+    
+    #CSVで取り込んだデータを綺麗なグラフで表示する
+    #https://toranoana-lab.hatenablog.com/entry/2018/11/27/182518
+
+    #ファイルやディレクトリが存在するか調べる (File.exist?, Dir.exist?)
+    #https://maku77.github.io/ruby/io/file-exist.html
+    data = []
+    data_temp = []
+    if File.file?('/myapp/db/record/'+timetoday+'SHT31Temp.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'SHT31Temp.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_temp.push(data)
+        end
+        @temp = data_temp
+    end
+
+
+    data = []
+    data_humi = []
+    if File.file?('/myapp/db/record/'+timetoday+'SHT31Humi.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'SHT31Humi.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_humi.push(data)
+        end
+        @humi = data_humi
+    end
+
+    data = []
+    data_komatsu25t3_shot = []
+    if File.file?('/myapp/db/record/'+timetoday+'ShotKomatsu25t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'ShotKomatsu25t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_komatsu25t3_shot.push(data)
+        end
+        @komatsu25t3_shot = data_komatsu25t3_shot
+    end
+
+    data = []
+    data_komatsu25t3_spm = []
+    if File.file?('/myapp/db/record/'+timetoday+'SPMKomatsu25t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'SPMKomatsu25t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_komatsu25t3_spm.push(data)
+        end
+        @komatsu25t3_spm = data_komatsu25t3_spm
+    end
+
+    data = []
+    data_komatsu25t3_chokotei = []
+    if File.file?('/myapp/db/record/'+timetoday+'StampingchokoteiKomatsu25t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'StampingchokoteiKomatsu25t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_komatsu25t3_chokotei.push(data)
+        end
+        @komatsu25t3_chokotei = data_komatsu25t3_chokotei
+    end
+
+    data = []
+    data_komatsu25t3_jyotai = []
+    if File.file?('/myapp/db/record/'+timetoday+'JYOTAIKomatsu25t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'JYOTAIKomatsu25t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_komatsu25t3_jyotai.push(data)
+        end
+        @komatsu25t3_jyotai = data_komatsu25t3_jyotai
+    end
+
+   
+
+
+
+
+
+    #timetoday=Time.now.strftime("%Y_%m_%d")
+    #file = Dir.glob("C:/Users/mec21/20230213_iot_csv_training_tailwind_daisyui_ancestry_importmap/db/record/"+timetoday+"SHT31Humi.csv")
+    #file = Dir.glob("/myapp/db/record/2023_02_18SHT31Temp.csv")
+    #IOTデータページ
+
+    @iots=Iot.all 
+  end
+
+  
+
+  
+
+  #def import
+    # fileはtmpに自動で一時保存される
+  #  Product.import(params[:file])
+  #  redirect_to products_url
+  #end
+
+
+
+  #def iot_import
+    # fileはtmpに自動で一時保存される
+
+    #【Rails】ファイルのフルパス、ファイル名を取得する
+    #https://opiyotan.hatenablog.com/entry/rails-glob
+
+
+    #time=Time.now.strftime("%Y_%m_%d")
+
+    #file = Dir.glob("C:/Users/mec21/20230213_iot_csv_training_tailwind_daisyui_ancestry_importmap/db/record/test.csv")
+    
+    #file = params[:file]
+    
+    
+    #datas = []
+    #unless file.nil?
+    #  ActiveRecord::Base.transaction do
+    #    CSV.foreach(file.path, headers: true) do |row|
+    #      datas.append(Hash[row])
+    #    end
+    #  end
+    #end
+    #@chartkickgraph = {"1": 1000,"3": 20000,"5": 1500,"7": 18000}
+    #@chartkickgraph = datas[0]
+   
+
+    #redirect_to products_url
+  #end
+
 
   #RailsでAxlsxを使ってxlsxを生成
   #https://qiita.com/necojackarc/items/0dbd672b2888c30c5a38
@@ -228,6 +354,9 @@ class ProductsController < ApplicationController
   
         sheet.add_row ["登録データ一覧"], style: title
         sheet.add_row %w(ID 図番 材料コード 文書名 詳細 カテゴリー フェーズ 項目 登録日 完了予定日 完了日 達成度 ステイタス), style: header
+        sheet.add_row %w(id partnumber materialcode documentname description category phase stage start_time deadline_at end_at goal_attainment_level status), style: header
+
+    
         @products.each do |pro|      
         sheet.add_row [pro.id, pro.partnumber,pro.materialcode,pro.documentname,pro.description,@dropdownlist[pro.category.to_i],@dropdownlist[pro.phase.to_i],@dropdownlist[pro.stage.to_i],pro.start_time.strftime('%y/%m/%d'),pro.deadline_at.strftime('%y/%m/%d'),pro.end_at.strftime('%y/%m/%d'),pro.goal_attainment_level,pro.status]
         end
@@ -251,6 +380,8 @@ class ProductsController < ApplicationController
   def product_params
     params.require(:product).permit(:documentname,:materialcode,:start_time, :deadline_at, :end_at,:status,:goal_attainment_level,:description,:category,:partnumber,:phase,:stage,documents:[])
   end
+
+  
 
   def phase
 
