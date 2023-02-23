@@ -46,6 +46,9 @@ module Myapp
 
     #Railsタイムゾーンまとめ
     #https://qiita.com/aosho235/items/a31b895ce46ee5d3b444
+
+    #【Rails】Time.currentとTime.nowの違い
+    #https://qiita.com/kodai_0122/items/111457104f83f1fb2259
     config.time_zone = 'Tokyo'
     config.active_record.default_timezone = :local
 

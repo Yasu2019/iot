@@ -13,19 +13,19 @@ https://teratail.com/questions/105974
 
 
 <% if @product.start_time==nil %>
-  <% dateset_start_time=Time.now %>
+  <% dateset_start_time=Time.current %>
 <% else %>
   <% dateset_start_time=@product.start_time %>
 <% end %>
 
 <% if @product.deadline_at==nil %>
-  <% dateset_deadline_at=Time.now %>
+  <% dateset_deadline_at=Time.current %>
 <% else %>
   <% dateset_deadline_at=@product.deadline_at %>
 <% end %>
 
 <% if @product.end_at==nil %>
-  <% dateset_end_at=Time.now %>
+  <% dateset_end_at=Time.current %>
 <% else %>
   <% dateset_end_at=@product.end_at %>
 <% end %>

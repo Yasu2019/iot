@@ -6,7 +6,11 @@ class ProductsController < ApplicationController
   before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download xlsx generate_xlsx]
 
   def iot
-    timetoday=Time.now.strftime("%Y_%m_%d")
+
+     #【Rails】Time.currentとTime.nowの違い
+    #https://qiita.com/kodai_0122/items/111457104f83f1fb2259
+
+    timetoday=Time.current.strftime("%Y_%m_%d")
 
     
     #CSVで取り込んだデータを綺麗なグラフで表示する
@@ -75,8 +79,28 @@ class ProductsController < ApplicationController
         @komatsu25t3_jyotai = data_komatsu25t3_jyotai
     end
 
-   
+    data = []
+    data_chokoteiDobby30t4 = []
+    if File.file?('/myapp/db/record/'+timetoday+'chokoteiDobby30t4.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'chokoteiDobby30t4.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_chokoteiDobby30t4.push(data)
+        end
+        @chokoteiDobby30t4 = data_chokoteiDobby30t4
+    end
 
+    data = []
+    data_JYOTAIDobby30t4 = []
+    if File.file?('/myapp/db/record/'+timetoday+'JYOTAIDobby30t4.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'JYOTAIDobby30t4.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_JYOTAIDobby30t4.push(data)
+        end
+        @JYOTAIDobby30t4 = data_JYOTAIDobby30t4
+    end
+
+
+   
 
 
 
