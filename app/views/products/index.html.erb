@@ -23,19 +23,19 @@ xl	1280px	@media (min-width: 1280px) { ... }
         <!--ここからメニュー-->
         <div class="menu-content">
             <ul>
-                <li class="py-2 border-b-2">
+                <li class="py-1 border-b-2">
                   <a> <%= link_to '新規製品登録', new_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>
                 </li>
                 
-                <li class="py-2 border-b-2">
+                <li class="py-1 border-b-2">
                   <a><%= link_to '全アイテム進捗一覧表', index3_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>
                 </li>
 
-                <li class="py-2 border-b-2">
+                <li class="py-1 border-b-2">
                   <a><%= link_to '全アイテム日程表', index9_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>                  
                 </li>
 
-                <li class="py-2 border-b-2"><a>
+                <li class="py-1 border-b-2"><a>
                         <%= form_with(url: index2_product_path, method: :get, local: true) do|form| %>
                         <%= form.label :"図番選択" %> 
                         <% @produc=Product.select(:partnumber).distinct.order(:partnumber) %>
@@ -44,7 +44,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
                         <% end %>
                     </a></li>
                 
-                <li class="py-2 border-b-2"><a>
+                <li class="py-1 border-b-2"><a>
                         <%= form_with(url: index8_product_path, method: :get, local: true) do|form| %>
                         <%= form.label :"図番選択" %> 
                         <% @produc=Product.select(:partnumber).distinct.order(:partnumber) %> 
@@ -57,33 +57,51 @@ xl	1280px	@media (min-width: 1280px) { ... }
                      #https://www.timedia.co.jp/tech/railsexcel/
                     -->
 
-                    <li class="py-2 "><a>
+                    <li class="py-1 "><a>
                     <%= form_with(url: index4_product_path, method: :get, local: true) do|form| %>
                     <%= form.submit "IATF要求事項説明",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
 
-                    <li class="py-2 "><a>
+                    <li class="py-1 "><a>
                     <%= form_with(url: graph_product_path, method: :get, local: true) do|form| %>
                     <%= form.submit "IATF進捗グラフ",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
 
-                    <li class="py-2 "><a>
+                    <li class="py-1 "><a>
                     <%= form_with(url: calendar_product_path, method: :get, local: true) do|form| %>
                     <%= form.submit "IATF進捗カレンダー",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
 
-                    <li class="py-2 "><a>
+                    <li class="py-1 "><a>
                     <%= form_with(url: training_product_path, method: :get, local: true) do|form| %>
                     <%= form.submit "IATF教材",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
 
-                    <li class="py-2 "><a>
+                    <li class="py-1 "><a>
                     <%= link_to "Excel出力", xlsx_product_path(@product, format: :xlsx),class:"btn btn-secondary" %>
                     </a></li>
+
+                    <li class="py-1 border-b-2"><a>
+                    <%= form_tag import_products_path, multipart: true do %>
+                    <label class="mt-2 sm:mt-0 py-2 w-[500px] sm:w-[212px] h-10 border border-primary-300 bg-gray-100 bg-opacity-50 text-primary-300 rounded-[3px] text-xs flex justify-center items-center">
+                    <span class="text-lg ml-5 mx-8 ">CSVファイル選択</span>
+                    <%= file_field_tag :file , class: "hidden"%>
+                    </label>
+
+                    <%= submit_tag "インポート",class:"btn btn-secondary"  %>
+                    <% end %>
+                    </a></li>
+
+                    <li class="py-1 border-b-2"><a>
+                    <%= form_with(url: iot_product_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IOTデータ",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+                
 
 
 
