@@ -137,7 +137,7 @@ gem 'poppler'
 
 gem "activestorage-office-previewer"
 
-gem 'devise'
+
 
 #【Ruby on Rails】CSVインポート
 #https://qiita.com/seitarooodayo/items/c9d6955a12ca0b1fd1d4
@@ -161,4 +161,12 @@ gem 'binding_of_caller', group: :development
 #pry-byebug を使ってRailsアプリをデバックする方法
 #https://qiita.com/ryosuketter/items/da3a38d0d41c7e20a2d6
 gem 'pry-byebug', group: :development
+
+#https://qiita.com/jnchito/items/20fad64ab162b2c49bb9
+gem 'devise','~> 4.9'
+
+#devise日本語化
+gem 'devise-i18n','~> 1.11.0' 
+
+
 

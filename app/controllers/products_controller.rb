@@ -5,6 +5,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download xlsx generate_xlsx]
 
+ 
+
   def iot
 
      #【Rails】Time.currentとTime.nowの違い
@@ -117,11 +119,11 @@ class ProductsController < ApplicationController
 
   
 
-  #def import
+  def import
     # fileはtmpに自動で一時保存される
-  #  Product.import(params[:file])
-  #  redirect_to products_url
-  #end
+    Product.import(params[:file])
+    redirect_to products_url
+  end
 
 
 
@@ -205,6 +207,7 @@ class ProductsController < ApplicationController
     #@products = Product.page(params[:page]).per(8)
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
+    @user = current_user
 
   end
 

@@ -45,7 +45,7 @@ https://teratail.com/questions/105974
   <!--
   <%= form.text_area :partnumber %><br><br>
   -->
-<div class="flex">
+<div class="lg:flex">
 
    <div class="my-5 mx-4 w-1/4 ">
       <%= form.label :図番を入力してください %>
@@ -107,24 +107,24 @@ https://iconsvg.xyz/
             <% end %>
 <% end %>
 
-  
 
   <br>
+  <div class="lg:flex">
+      <div class="my-5 w-1/3">
+        <%= form.label :登録日 %>
+        <%= form.date_field :start_time, value: dateset_start_time.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 bg-gray-100 bg-opacity-50" %>
+      </div>
 
- <span class="my-5 mx-4">
-    <%= form.label :登録日 %>
-    <%= form.date_field :start_time, value: dateset_start_time.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/5 bg-gray-100 bg-opacity-50" %>
-  </span>
+      <div class="my-5 w-1/3">
+        <%= form.label :完成予定日 %>
+        <%= form.date_field :deadline_at, value: dateset_deadline_at.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 bg-gray-100 bg-opacity-50 " %>
+      </div>
 
-   <span class="my-5">
-    <%= form.label :完成予定日 %>
-    <%= form.date_field :deadline_at, value: dateset_deadline_at.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/5 bg-gray-100 bg-opacity-50 " %>
-  </span>
-
-     <span class="my-5">
-    <%= form.label :完成日 %>
-    <%= form.date_field :end_at, value: dateset_end_at.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 w-1/5 bg-gray-100 bg-opacity-50" %>
-  </span>
+      <div class="my-5 w-1/3">
+        <%= form.label :完成日 %>
+        <%= form.date_field :end_at, value: dateset_end_at.strftime("%Y-%m-%d"), class: "shadow rounded-md border border-gray-200 outline-none px-3 py-2 mt-2 bg-gray-100 bg-opacity-50" %>
+      </div>
+  </div>
 
    <% if @product.status=="完了" %>
        <% num=100 %>

@@ -85,6 +85,8 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <%= link_to "Excel出力", xlsx_product_path(@product, format: :xlsx),class:"btn btn-secondary" %>
                     </a></li>
 
+                    <!--
+
                     <li class="py-1 border-b-2"><a>
                     <%= form_tag import_products_path, multipart: true do %>
                     <label class="mt-2 sm:mt-0 py-2 w-[500px] sm:w-[212px] h-10 border border-primary-300 bg-gray-100 bg-opacity-50 text-primary-300 rounded-[3px] text-xs flex justify-center items-center">
@@ -95,6 +97,8 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <%= submit_tag "インポート",class:"btn btn-secondary"  %>
                     <% end %>
                     </a></li>
+
+                    -->
 
                     <li class="py-1 border-b-2"><a>
                     <%= form_with(url: iot_product_path, method: :get, local: true) do|form| %>
@@ -166,16 +170,46 @@ xl	1280px	@media (min-width: 1280px) { ... }
 <p id="notice"><%= notice %></p>
 
   <!-- Header -->
-<header>
+<header >
   <!-- navbar and menu -->
   <nav class="shadow">
 
-  <div class="flex justify-between items-center py-6 px-10 container mx-auto">
+  <div class="sticky top-0 flex justify-between items-center py-6 px-10 container mx-auto ">
 
     <div>
       <h1 class="px-12 text-3xl font-bold bg-gradient-to-tr from-indigo-600 to-green-600 bg-clip-text text-transparent hover:cursor-pointer">IATF16949</h1>
     </div>
 
+    <div>    
+    <!--
+    Devise 4.9をインストールしてRails 7.0 （Hotwire/Turbo）に対応する
+    https://qiita.com/jnchito/items/20fad64ab162b2c49bb9
+
+    Rails 7.0 + Ruby 3.1でゼロからアプリを作ってみたときにハマったところあれこれ
+    https://qiita.com/jnchito/items/5c41a7031404c313da1f
+
+    railsのdeviseでログアウトができず、Routing Errorになる
+    https://teratail.com/questions/240677
+
+    https://qiita.com/newburu/items/64f214d2f0fbc7a05d42
+    https://qiita.com/newburu/items/64f214d2f0fbc7a05d42
+
+
+    -->
+    
+    <%= "Emailアドレス："%>
+        <%= @user.email %> <br>
+    <%= "名前　　　　 ："%>
+        <%= @user.name %> <br>
+    <%= "識別　　　　 ："%>
+        <%= @user.role %> <br>
+
+        <%= link_to 'サインアウト', destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+        <!--
+        <%= button_to( "サインアウト", destroy_user_session_path, method: :delete ) %>
+        -->
+    </div>
+  
     <div>
       <!--
       <div class="hover:cursor-pointer sm:hidden">
@@ -313,7 +347,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <!--
                     【Ruby on Rails】CSVインポート
                     https://qiita.com/seitarooodayo/items/c9d6955a12ca0b1fd1d4
-                    -->
+                    
 
                     <li class="py-1 border-b-2"><a>
                     <%= form_tag import_products_path, multipart: true do %>
@@ -325,6 +359,7 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <%= submit_tag "インポート",class:"btn btn-secondary"  %>
                     <% end %>
                     </a></li>
+                    -->
 
                     <li class="py-1 border-b-2"><a>
                     <%= form_with(url: iot_product_path, method: :get, local: true) do|form| %>

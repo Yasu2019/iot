@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+
+  #Rails7でDeviseを導入される方へ
+  #https://kobacchi.com/rails7-devise-responded-to-turbo/
+  devise_for :users , controllers: {
+    sessions: 'users/sessions'
+  }
+
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")
@@ -20,6 +28,7 @@ Rails.application.routes.draw do
   #post 'products/iot_import' => 'products#iot_import',     as: 'iot_import_product' # IATF要求事項説明ページ
 
   root to: 'products#index'
+  #root to: 'users#sign_in'
 
   #【Ruby on Rails】CSVインポート
   #https://qiita.com/seitarooodayo/items/c9d6955a12ca0b1fd1d4
@@ -28,10 +37,10 @@ Rails.application.routes.draw do
     collection { post :import }
    end
 
-  resources :iots do
-    collection { post :iot_import,:iot_import1,:test }
-
-  end
+  #resources :iots do
+  #  collection { post :iot_import,:iot_import1,:test }
+  #
+  #end
 
   
 end
