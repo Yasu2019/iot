@@ -24,15 +24,15 @@ xl	1280px	@media (min-width: 1280px) { ... }
         <div class="menu-content">
             <ul>
                 <li class="py-1 border-b-2">
-                  <a> <%= link_to '新規製品登録', new_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>
+                  <a> <%= link_to '新規製品登録', new_product_path, class: "py-1 text-gray-700 hover:text-indigo-600 text-md" %></a>
                 </li>
                 
                 <li class="py-1 border-b-2">
-                  <a><%= link_to '全アイテム進捗一覧表', index3_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>
+                  <a><%= link_to '全アイテム進捗一覧表', index3_product_path, class: "py-1 text-gray-700 hover:text-indigo-600 text-md" %></a>
                 </li>
 
                 <li class="py-1 border-b-2">
-                  <a><%= link_to '全アイテム日程表', index9_product_path, class: "py-2 text-gray-700 hover:text-indigo-600 text-md" %></a>                  
+                  <a><%= link_to '全アイテム日程表', index9_product_path, class: "py-1 text-gray-700 hover:text-indigo-600 text-md" %></a>                  
                 </li>
 
                 <li class="py-1 border-b-2"><a>
@@ -103,6 +103,12 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <li class="py-1 border-b-2"><a>
                     <%= form_with(url: iot_product_path, method: :get, local: true) do|form| %>
                     <%= form.submit "IOTデータ",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+
+                    <li class="py-1 border-b-2"><a>
+                    <%= form_with(url: index_touan_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATF評価テスト",class:"btn btn-secondary" %>
                     <% end %>
                     </a></li>
                 
@@ -367,6 +373,19 @@ xl	1280px	@media (min-width: 1280px) { ... }
                     <% end %>
                     </a></li>
 
+                    <li class="py-1 border-b-2"><a>
+                    <%= form_with(url: index_touan_path, method: :get, local: true) do|form| %>
+                    <%= form.submit "IATF評価テスト",class:"btn btn-secondary" %>
+                    <% end %>
+                    </a></li>
+
+                    
+
+
+
+
+
+
                     <!--
                     <li class="py-2 "><a>
                     <%= form_with(url: process_design_download_path, method: :get, local: true) do|form| %>
@@ -496,24 +515,15 @@ xl	1280px	@media (min-width: 1280px) { ... }
 
 
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <style>
+
+.sticky {
+    position: sticky;
+}
+
+
+
 .menu-btn {
     position: fixed;
     top: 10px;

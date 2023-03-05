@@ -1,0 +1,3 @@
+class Testmondai < ApplicationRecord
+ 
+end

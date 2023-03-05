@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_02_25_085145) do
+ActiveRecord::Schema[7.0].define(version: 2023_02_27_135655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -42,13 +42,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_085145) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "iots", force: :cascade do |t|
-    t.datetime "date"
-    t.float "data"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "phases", force: :cascade do |t|
     t.string "name"
     t.string "ancestry"
@@ -75,6 +68,36 @@ ActiveRecord::Schema[7.0].define(version: 2023_02_25_085145) do
     t.integer "goal_attainment_level"
     t.integer "tasseido"
     t.string "object"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "testmondais", force: :cascade do |t|
+    t.string "kajyou"
+    t.string "mondai_no"
+    t.string "rev"
+    t.string "mondai"
+    t.string "mondai_a"
+    t.string "mondai_b"
+    t.string "mondai_c"
+    t.string "seikai"
+    t.string "kaisetsu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "touans", force: :cascade do |t|
+    t.string "kajyou"
+    t.string "mondai_no"
+    t.string "rev"
+    t.string "mondai"
+    t.string "mondai_a"
+    t.string "mondai_b"
+    t.string "mondai_c"
+    t.string "seikai"
+    t.string "kaisetsu"
+    t.string "kaito"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

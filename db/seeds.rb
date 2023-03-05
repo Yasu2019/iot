@@ -10,5 +10,36 @@ User.create!(id: 1, email: "yasuhiro-suzuki@mitsui-s.com", password: "password",
 User.create!(id: 2, email: "y.suzuki.hk@gmail.com", password: "password", name: "鈴木康弘・gmail", role: :staff)
 User.create!(id: 3, email: "y_suzuki_hk@yahoo.co.jp", password: "password", name: "鈴木康弘・yahoo", role: :normal)
 
+#rails c でカラムの確認
+#https://qiita.com/littlekbt/items/48fa2b428147921db5a5
+
+CSV.foreach('db/record/test_mondai.csv') do |row|
+  Testmondai.create(
+  :kajyou    => row[0], 
+  :mondai_no => row[1], 
+  :rev       => row[2],
+  :mondai    => row[3],
+  :mondai_a  => row[4],
+  :mondai_b  => row[5],
+  :mondai_c  => row[6],
+  :seikai    => row[7],
+  :kaisetsu  => row[8]  
+  )
+end
+
+#下記では、モデルにCSVのデータを流し込めなかった。。。
+#CSV.foreach('db/record/test_mondai.csv',headers: true) do |row|
+#  Testmondai.create(
+#  kajyou:    row['kajyou'], 
+#  mondai_no: row['mondai_no'],
+#  rev:       row['rev'],
+#  mondai:    row['mondai'],
+#  mondai_a:  row['mondai_a'], 
+#  mondai_b:  row['mondai_b'], 
+#  mondai_c:  row['mondai_c'],
+#  seikai:    row['seikai'], 
+#  kaisetsu:  row['kaisetsu']
+#  )
+#end
 
 

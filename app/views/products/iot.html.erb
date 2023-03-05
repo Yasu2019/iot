@@ -12,10 +12,10 @@
 	<div class="tab_area">
 		<label class="tab1_label" for="tab1">プレス現場 室温・湿度</label>
 		<label class="tab2_label" for="tab2">Komatsu25トン3号機</label>
-		<label class="tab3_label" for="tab3">Dobby30トン号機</label>
-    <label class="tab4_label" for="tab4">フェーズ4</label>
-    <label class="tab5_label" for="tab5">フェーズ5</label>
-    <label class="tab6_label" for="tab6">PPAP</label>
+		<label class="tab3_label" for="tab3">Dobby30トン4号機</label>
+    <label class="tab4_label" for="tab4">Amada80トン3号機</label>
+    <label class="tab5_label" for="tab5">予備</label>
+    <label class="tab6_label" for="tab6">予備</label>
 
 	</div>
 	  <div class="panel_area">
@@ -58,6 +58,17 @@
 
 	
       <div id="panel4" class="tab_panel">
+
+      
+      <%= line_chart @StampingJYOTAIAmada80t3, discrete: true, curve: false, label: "Amada80トン3号機　稼働状態", xtitle: "時間", ytitle: "稼働状況",width: "1200px", height: "400px" %>  
+ 
+     <%= line_chart @StampingchokoteiAmada80t3, discrete: true, curve: false, label: "Amada80トン3号機　チョコ停止回数", xtitle: "時間", ytitle: "チョコ停止回数",width: "1200px", height: "400px" %>
+
+     <%= line_chart @SPMAmada80t3, discrete: true, curve: false, label: "Amada80トン3号機　SPM", xtitle: "時間", ytitle: "SPM",width: "1200px", height: "400px" %>  
+ 
+     <%= line_chart @ShotAmada80t3, discrete: true, curve: false, label: "Amada80トン3号機　ショット数", xtitle: "時間", ytitle: "ショット数",width: "1200px", height: "400px" %>  
+
+
 	  	</div>
    
 

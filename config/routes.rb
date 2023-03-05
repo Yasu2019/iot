@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #get 'touan/new'
 
   #Rails7でDeviseを導入される方へ
   #https://kobacchi.com/rails7-devise-responded-to-turbo/
@@ -11,6 +12,23 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+  
+  
+  
+  #post 'touans/test_save' => 'touans#test_save',      as: 'test_save_touan'
+  get 'touans/index' => 'touans#index',                 as: 'index_touan' # IATF要求事項説明ページ
+  #get 'touans/test' => 'touans#test',                 as: 'test_touan' # IATF要求事項説明ページ
+  #get 'touans/new' => 'touans#new',                 as: 'new_touan' # IATF要求事項説明ページ
+  
+  #resources :touans
+
+  
+Rails.application.routes.draw do
+  resources :touans, only: [:index, :new, :create]
+  
+end
+
+
   get 'products/iot' => 'products#iot',                   as: 'iot_product' # IATF要求事項説明ページ
   get 'products/graph' => 'products#graph',               as: 'graph_product'
   get 'products/calendar' => 'products#calendar',         as: 'calendar_product'

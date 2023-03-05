@@ -5,7 +5,20 @@ class ProductsController < ApplicationController
   before_action :set_product, only: %i[ show edit update destroy ]
   before_action :phase, only: %i[ graph calendar new edit show index index2 index3 index8 index9 download xlsx generate_xlsx]
 
- 
+  
+
+
+
+  #  @touan = Touan.find(params[:id])
+  #  @touan.kaito = params[:touan][:kaito]
+  #  if @touan.save
+  #    redirect_to product_path, notice: '登録しました。'
+  #  else
+  #    render :test
+  #  end
+  #end
+
+
 
   def iot
 
@@ -40,6 +53,8 @@ class ProductsController < ApplicationController
         end
         @humi = data_humi
     end
+
+    #----- Komatsu25トン3号機
 
     data = []
     data_komatsu25t3_shot = []
@@ -81,6 +96,8 @@ class ProductsController < ApplicationController
         @komatsu25t3_jyotai = data_komatsu25t3_jyotai
     end
 
+    #----- Dobby3トン4号機
+
     data = []
     data_chokoteiDobby30t4 = []
     if File.file?('/myapp/db/record/'+timetoday+'chokoteiDobby30t4.csv')
@@ -101,9 +118,47 @@ class ProductsController < ApplicationController
         @JYOTAIDobby30t4 = data_JYOTAIDobby30t4
     end
 
+    #----- Amada80トン3号機
 
-   
+    data = []
+    data_StampingJYOTAIAmada80t3 = []
+    if File.file?('/myapp/db/record/'+timetoday+'StampingJYOTAIAmada80t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'StampingJYOTAIAmada80t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_StampingJYOTAIAmada80t3.push(data)
+        end
+        @StampingJYOTAIAmada80t3 = StampingJYOTAIAmada80t3
+    end
 
+    data = []
+    data_StampingchokoteiAmada80t3 = []
+    if File.file?('/myapp/db/record/'+timetoday+'StampingchokoteiAmada80t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'StampingchokoteiAmada80t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_StampingchokoteiAmada80t3.push(data)
+        end
+        @StampingchokoteiAmada80t3 = StampingchokoteiAmada80t3
+    end
+
+    data = []
+    data_SPMAmada80t3 = []
+    if File.file?('/myapp/db/record/'+timetoday+'SPMAmada80t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'SPMAmada80t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_SPMAmada80t3.push(data)
+        end
+        @SPMAmada80t3 = SPMAmada80t3
+    end
+
+    data = []
+    data_ShotAmada80t3 = []
+    if File.file?('/myapp/db/record/'+timetoday+'ShotAmada80t3.csv')
+        CSV.foreach('/myapp/db/record/'+timetoday+'ShotAmada80t3.csv', headers: true) do |row|
+          data=[row[0],row[1]]
+          data_ShotAmada80t3.push(data)
+        end
+        @ShotAmada80t3 = ShotAmada80t3
+    end
 
 
 
@@ -112,12 +167,8 @@ class ProductsController < ApplicationController
     #file = Dir.glob("/myapp/db/record/2023_02_18SHT31Temp.csv")
     #IOTデータページ
 
-    @iots=Iot.all 
+    #@iots=Iot.all 
   end
-
-  
-
-  
 
   def import
     # fileはtmpに自動で一時保存される
@@ -125,22 +176,18 @@ class ProductsController < ApplicationController
     redirect_to products_url
   end
 
-
-
   #def iot_import
     # fileはtmpに自動で一時保存される
 
     #【Rails】ファイルのフルパス、ファイル名を取得する
     #https://opiyotan.hatenablog.com/entry/rails-glob
 
-
     #time=Time.now.strftime("%Y_%m_%d")
 
     #file = Dir.glob("C:/Users/mec21/20230213_iot_csv_training_tailwind_daisyui_ancestry_importmap/db/record/test.csv")
     
     #file = params[:file]
-    
-    
+        
     #datas = []
     #unless file.nil?
     #  ActiveRecord::Base.transaction do
@@ -152,10 +199,8 @@ class ProductsController < ApplicationController
     #@chartkickgraph = {"1": 1000,"3": 20000,"5": 1500,"7": 18000}
     #@chartkickgraph = datas[0]
    
-
     #redirect_to products_url
   #end
-
 
   #RailsでAxlsxを使ってxlsxを生成
   #https://qiita.com/necojackarc/items/0dbd672b2888c30c5a38
@@ -208,6 +253,21 @@ class ProductsController < ApplicationController
     @q = Product.ransack(params[:q])
     @products = @q.result(distinct: true)
     @user = current_user
+    @testmondais = Testmondai.all
+
+
+    #data = []
+    #data_test = []
+    #if File.file?('/myapp/db/record/test_mondai.csv')
+    #    CSV.foreach('/myapp/db/record/test_mondai.csv', headers: true) do |row|
+    #      data=[row[0],row[1],row[2],row[3],row[4],row[5],row[6],row[7],row[8]]
+    #      data_test.push(data)
+    #    end
+    #    @test_mondai = data_test
+    #end
+
+
+    #@test_mondais=Test_mondai
 
   end
 

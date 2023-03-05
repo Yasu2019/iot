@@ -1,0 +1,21 @@
+
+ <% @touans.each do |tou| %>
+ <%= tou.kaito %>
+ <% end %>
+
+
+
+<li class="py-1 border-b-2"><a>
+<%= form_with(url: new_touan_path, method: :get, local: true) do|form| %>
+<%= form.label :"IATF評価テスト" %> 
+<% @tes=Testmondai.select(:kajyou).distinct.order(:kajyou) %>
+<%= form.collection_select(:kajyou, @tes, :kajyou, :kajyou,{prompt: '選択してください',class:"hidden"})%> 
+<%= form.submit "IATFテスト(箇条リスト)",class:"btn"%>
+<% end %>
+</a></li>
+
+
+
+
+
+<%= link_to '戻る', root_path, class: 'btn btn-accent' %>
