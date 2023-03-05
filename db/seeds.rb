@@ -5,10 +5,18 @@ CSV.foreach('db/category.csv') do |row|
   
 end
 
-
+User.create!(id: 0, email: "admin@iatf.co.jp", password: "password", name: "ミツイ精密", role: :normal)
 User.create!(id: 1, email: "yasuhiro-suzuki@mitsui-s.com", password: "password", name: "鈴木康弘", role: :staff)
 User.create!(id: 2, email: "y.suzuki.hk@gmail.com", password: "password", name: "鈴木康弘・gmail", role: :staff)
 User.create!(id: 3, email: "y_suzuki_hk@yahoo.co.jp", password: "password", name: "鈴木康弘・yahoo", role: :normal)
+User.create!(id: 4, email: "h-hirano@mitsui-s.com", password: "password", name: "平野東之", role: :normal)
+User.create!(id: 5, email: "m-ishii@mitsui-s.com", password: "password", name: "石井 三明", role: :normal)
+User.create!(id: 6, email: "k-seo@mitsui-s.com", password: "password", name: "瀬尾健太", role: :normal)
+User.create!(id: 7, email: "t-hyogo@mitsui-s.com", password: "password", name: "兵庫貴帆", role: :normal)
+User.create!(id: 8, email: "k-asano@mitsui-s.com", password: "password", name: "浅野係長", role: :normal)
+User.create!(id: 9, email: "y-imamura@mitsui-s.com", password: "password", name: "今村雄二", role: :normal)
+User.create!(id:10, email: "ngocanhnguyen@mitsui-s.com", password: "password", name: "アイン", role: :normal)
+
 
 #rails c でカラムの確認
 #https://qiita.com/littlekbt/items/48fa2b428147921db5a5
