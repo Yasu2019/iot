@@ -127,7 +127,7 @@ class ProductsController < ApplicationController
           data=[row[0],row[1]]
           data_StampingJYOTAIAmada80t3.push(data)
         end
-        @StampingJYOTAIAmada80t3 = StampingJYOTAIAmada80t3
+        @StampingJYOTAIAmada80t3 = data_StampingJYOTAIAmada80t3
     end
 
     data = []
@@ -137,7 +137,7 @@ class ProductsController < ApplicationController
           data=[row[0],row[1]]
           data_StampingchokoteiAmada80t3.push(data)
         end
-        @StampingchokoteiAmada80t3 = StampingchokoteiAmada80t3
+        @StampingchokoteiAmada80t3 = data_StampingchokoteiAmada80t3
     end
 
     data = []
@@ -147,7 +147,7 @@ class ProductsController < ApplicationController
           data=[row[0],row[1]]
           data_SPMAmada80t3.push(data)
         end
-        @SPMAmada80t3 = SPMAmada80t3
+        @SPMAmada80t3 = data_SPMAmada80t3
     end
 
     data = []
@@ -157,7 +157,7 @@ class ProductsController < ApplicationController
           data=[row[0],row[1]]
           data_ShotAmada80t3.push(data)
         end
-        @ShotAmada80t3 = ShotAmada80t3
+        @ShotAmada80t3 = data_ShotAmada80t3
     end
 
 
